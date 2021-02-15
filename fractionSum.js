@@ -1,4 +1,4 @@
-const getFactor = num => {
+const getFactors = num => {
 	const factors = [];
 	let i = 1;
 	while (i <= num) {
@@ -9,12 +9,11 @@ const getFactor = num => {
 }
 
 const getRealFraction = (a, b) => {
-	const factorB = getFactor(b).reverse();
-	// need to reduc a/b -> x/y
-	// x is numerator, y is denominator
+	const factorB = getFactors(b).reverse();
+	// reduce to real fraction: a/b -> x/y
 	let x = a, y = b;
 	for (let i = 0; i < factorB.length; i++) {
-		if (a % factorB[i] == 0 && b % factorB[i] == 0) {
+		if (x % factorB[i] == 0 && y % factorB[i] == 0) {
 			x /= factorB[i];
 			y /= factorB[i];
 			if (y == 1) break;
@@ -24,10 +23,17 @@ const getRealFraction = (a, b) => {
 }
 
 const getFractionSum = (array1, array2) => {
+
+	// a/b -> a = numerator, b = denominator
 	const [numerator1, denominator1] = array1;
 	const [numerator2, denominator2] = array2;
+
+	if (denominator1 == 0 || denominator2 == 0) throw new Error("Division by zero");
+
 	const sum = [ (numerator1*denominator2 + numerator2*denominator1), denominator1*denominator2 ];
 	return getRealFraction(...sum);
 }
 
 console.log(getFractionSum([3, 5], [7, 5]));
+console.log(getFractionSum([0, 5], [7, 5]));
+console.log(getFractionSum([4, 5], [7, 10]));

@@ -1,5 +1,12 @@
 const gen = (str, open, close, n) => {
 
+	// for balanced parenthesis -> there are n "open parenthesis" and n "close parenthesis"
+	// e.g. "((()))"
+	// So, starting from an empty string.
+	// There are 2 choices to consider.
+	// 1. If the number of "open parenthesis" is less than n -> can add "(" to the string
+	// 2. If the number of "open parenthesis" is more than the number of "close parenthesis" -> can add ")" to the string
+	
 	if (close == n) return [str];
 
 	const ans = [];
